@@ -8,6 +8,7 @@ Graph GraphGenerator::createGraph(std::ifstream &input) {
     int32_t numVertex = getNumVertex(input);
     Graph graph(isOriented, numVertex);
     setEdges(input, graph);
+    return graph;
 }
 
 bool GraphGenerator::getIsOriented(std::ifstream &input) {
@@ -22,7 +23,7 @@ bool GraphGenerator::getIsOriented(std::ifstream &input) {
     if (matches.size() != 2)
         throw "Erro de formatação!";
 
-    if ("sim" != matches.str(1) || "nao" != matches.str(1))
+    if ("sim" != matches.str(1) && "nao" != matches.str(1))
         throw "Erro de formatação!";
 
     return "sim" == matches.str(1);
@@ -34,7 +35,7 @@ int32_t GraphGenerator::getNumVertex(std::ifstream &input) {
     line.erase(remove_if(line.begin(), line.end(), isspace), line.end());
 
     std::smatch matches;
-    std::regex reg("V=([0-9])");
+    std::regex reg("V=([0-9]+)");
     std::regex_search(line,matches,reg);
 
     if (matches.size() != 2)
@@ -49,7 +50,8 @@ void GraphGenerator::setEdges(std::ifstream& input, Graph& graph){
         line.erase(remove_if(line.begin(), line.end(), isspace), line.end());
 
         std::smatch matches;
-        std::regex reg("\\(([0-9]),([0-9])\\):(-?[0-9])");
+        std::regex reg("\\(([0-9]+),([0-9]+)\\):(-?[0-9]+)");
+        std::regex_search(line,matches,reg);
 
         if (matches.size() != 4)
             throw "Erro de formatação!";
