@@ -1,0 +1,1 @@
+/usr/bin/c++ -g CMakeFiles/graphsLyn.dir/mainLyn.cpp.o CMakeFiles/graphsLyn.dir/graph/GraphGenerator.cpp.o CMakeFiles/graphsLyn.dir/App.cpp.o CMakeFiles/graphsLyn.dir/executors/Executor.cpp.o CMakeFiles/graphsLyn.dir/graph/Graph.cpp.o CMakeFiles/graphsLyn.dir/executors/DFSExecutor.cpp.o -o graphsLyn 

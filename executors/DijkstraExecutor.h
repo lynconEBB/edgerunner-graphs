@@ -1,14 +1,11 @@
-//
-// Created by lucas on 30/03/23.
-//
-
 #ifndef GRAPHS_DIJKSTRAEXECUTOR_H
 #define GRAPHS_DIJKSTRAEXECUTOR_H
+#include "Executor.h"
 
-
-class DijkstraExecutor {
-
+class DijkstraExecutor : public Executor{
+public:
+    void execute(Graph graph) override;
 };
 
 
-#endif //GRAPHS_DIJKSTRAEXECUTOR_H
+#endif

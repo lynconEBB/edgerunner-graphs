@@ -1,0 +1,1 @@
+/usr/bin/c++ -g CMakeFiles/graphsLuc.dir/mainLuc.cpp.o CMakeFiles/graphsLuc.dir/graph/GraphGenerator.cpp.o CMakeFiles/graphsLuc.dir/App.cpp.o CMakeFiles/graphsLuc.dir/executors/Executor.cpp.o CMakeFiles/graphsLuc.dir/graph/Graph.cpp.o CMakeFiles/graphsLuc.dir/executors/DijkstraExecutor.cpp.o -o graphsLuc 
