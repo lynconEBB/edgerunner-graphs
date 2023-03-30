@@ -1,3 +1,4 @@
-/home/user/dev/graphs/cmake-build-debug/CMakeFiles/graphs.dir
+/home/user/dev/graphs/cmake-build-debug/CMakeFiles/graphsLyn.dir
+/home/user/dev/graphs/cmake-build-debug/CMakeFiles/graphsLuc.dir
 /home/user/dev/graphs/cmake-build-debug/CMakeFiles/edit_cache.dir
 /home/user/dev/graphs/cmake-build-debug/CMakeFiles/rebuild_cache.dir

@@ -1,0 +1,5 @@
+# ninja log v5
+203	270	1680181219164444268	graphsLuc	4ada4a5305c4863a
+0	14	1680181218912446859	CMakeFiles/graphsLuc.dir/GraphGenerator.cpp.o	589c5b0c5e05a88f
+1	21	1680181625168561703	build.ninja	7b2c9b6f1fd0abef
+0	203	1680181219100444819	CMakeFiles/graphsLuc.dir/mainLuc.cpp.o	b932f95e1eae282d
