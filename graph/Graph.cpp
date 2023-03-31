@@ -3,6 +3,8 @@
 
 void Graph::addEdge(int32_t src, int32_t dest, int32_t weight) {
     adjList[src].emplace_back(dest, weight);
+    if (!isOriented)
+        adjList[dest].emplace_back(src,weight);
 }
 
 void Graph::print() {

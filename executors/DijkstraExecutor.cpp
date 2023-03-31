@@ -1,41 +1,62 @@
 #include "DijkstraExecutor.h"
 #include <iostream>
 #include <limits>
-#include <queue>
 
 void DijkstraExecutor::execute(Graph graph) {
-    int origin;
+     int origin;
     std::cin >> origin;
-    int n = graph.adjList.size();
-    std::vector<int> dist(n, std::numeric_limits<int>::max());
-    std::vector<int> prev(n, -1);
-    dist[origin] = 0;
-    std::priority_queue<std::pair<int, int>, std::vector<std::pair<int, int>>, std::greater<std::pair<int, int>>> pq;
-    pq.push(std::make_pair(0, origin));
-    while (!pq.empty()) {
-        int u = pq.top().second;
-        pq.pop();
-        for (auto& edge : graph.adjList[u]) {
-            int v = edge.dest;
-            int w = edge.weight;
-            if (dist[v] > dist[u] + w) {
-                dist[v] = dist[u] + w;
-                prev[v] = u;
-                pq.push(std::make_pair(dist[v], v));
+
+    std::vector<int> distance(graph.adjList.size(), std::numeric_limits<int>::max());
+    std::vector<int> previous(graph.adjList.size(), -1);
+
+    EdgePriorityQueue priorityQueue;
+
+    minDistance(graph, origin, distance, previous, priorityQueue);
+
+    print(graph, distance, previous);
+}
+
+bool DijkstraExecutor::validate(Graph graph){
+    for (int i = 0; i < graph.adjList.size(); i++) {
+        for (Edge edge : graph.adjList[i] ) {
+            if(edge.weight < 0) return false;
+        }
+    }
+    return true;
+}
+
+void DijkstraExecutor::minDistance(Graph graph, int32_t origin, std::vector<int32_t>& distance,
+                                   std::vector<int32_t>& previous, EdgePriorityQueue& priorityQueue){
+    distance[origin] = 0;
+    priorityQueue.emplace(origin, 0);
+
+    while (!priorityQueue.empty()) {
+        int u = priorityQueue.top().dest;
+        priorityQueue.pop();
+        for (Edge &edge: graph.adjList[u]) {
+            if (distance[edge.dest] > distance[u] + edge.weight) {
+                distance[edge.dest] = distance[u] + edge.weight;
+                previous[edge.dest] = u;
+                priorityQueue.push(Edge(edge.dest, distance[edge.dest]));
             }
         }
     }
-    for (int i = 0; i < n; i++) {
-        std::cout << "destino: " << i << " dist.: ";
-        if (dist[i] == std::numeric_limits<int>::max()) {
+
+
+}
+
+void DijkstraExecutor::print(Graph graph, std::vector<int32_t> distance, std::vector<int32_t> previous){
+    for (int i = 0; i < graph.adjList.size(); i++) {
+        std::cout << "destino: " << i << " distância: ";
+        if (distance[i] == std::numeric_limits<int>::max()) {
             std::cout << "--" << " caminho: --" << std::endl;
         } else {
-            std::cout << dist[i] << " caminho: ";
+            std::cout << distance[i] << " caminho: ";
             std::vector<int> path;
             int j = i;
             while (j != -1) {
                 path.push_back(j);
-                j = prev[j];
+                j = previous[j];
             }
             for (int k = path.size() - 1; k >= 0; k--) {
                 std::cout << path[k];

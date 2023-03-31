@@ -5,7 +5,7 @@
 #include "executors/DijkstraExecutor.h"
 
 int main() {
-    std::ifstream file("/home/lucas/Documents/graphs-playground/tests/test1.txt");
+    std::ifstream file("../tests/test3.txt");
     if (!file) {
         std::cout << "Não foi possível abrir o arquivo.";
         return 1;
