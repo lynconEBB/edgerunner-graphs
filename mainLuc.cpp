@@ -3,9 +3,10 @@
 #include "graph/GraphGenerator.h"
 #include "graph/Graph.h"
 #include "solvers/DijkstraSolver.h"
+#include "solvers/BellmanFordSolver.h"
 
 int main() {
-    std::ifstream file("../tests/test3.txt");
+    std::ifstream file("../tests/test1.txt");
     if (!file) {
         std::cout << "Não foi possível abrir o arquivo.";
         return 1;
@@ -15,8 +16,11 @@ int main() {
     Graph graph = graphGen.createGraph(file);
     graph.print();
 
-    DijkstraSolver dj;
-    dj.solve(graph);
+    //DijkstraSolver dj;
+    //dj.solve(graph);
+
+    BellmanFordSolver bf;
+    bf.solve(graph);
 
     return 0;
 }
