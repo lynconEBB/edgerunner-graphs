@@ -3,21 +3,21 @@
 #include <limits>
 
 void DijkstraSolver::solve(Graph graph) {
-    int origin;
+    int32_t origin;
     std::cin >> origin;
 
-    std::vector<int> distance(graph.adjList.size(), std::numeric_limits<int>::max());
-    std::vector<int> previous(graph.adjList.size(), -1);
+    std::vector<int32_t> distance(graph.adjList.size(), std::numeric_limits<int32_t>::max());
+    std::vector<int32_t> previous(graph.adjList.size(), -1);
 
     EdgePriorityQueue priorityQueue;
 
     minDistance(graph, origin, distance, previous, priorityQueue);
 
-    print(graph, distance, previous);
+    print(graph, distance, previous, origin);
 }
 
 bool DijkstraSolver::validate(Graph graph){
-    for (int i = 0; i < graph.adjList.size(); i++) {
+    for (int32_t i = 0; i < graph.adjList.size(); i++) {
         for (Edge edge : graph.adjList[i] ) {
             if(edge.weight < 0) return false;
         }
@@ -31,7 +31,7 @@ void DijkstraSolver::minDistance(Graph graph, int32_t origin, std::vector<int32_
     priorityQueue.emplace(origin, 0);
 
     while (!priorityQueue.empty()) {
-        int u = priorityQueue.top().dest;
+        int32_t u = priorityQueue.top().dest;
         priorityQueue.pop();
         for (Edge &edge: graph.adjList[u]) {
             if (distance[edge.dest] > distance[u] + edge.weight) {
@@ -45,20 +45,21 @@ void DijkstraSolver::minDistance(Graph graph, int32_t origin, std::vector<int32_
 
 }
 
-void DijkstraSolver::print(Graph graph, std::vector<int32_t> distance, std::vector<int32_t> previous){
-    for (int i = 0; i < graph.adjList.size(); i++) {
+void DijkstraSolver::print(Graph graph, std::vector<int32_t> distance, std::vector<int32_t> previous, int32_t origin){
+    std::cout << "origem: " << origin << std::endl;
+    for (int32_t i = 0; i < graph.adjList.size(); i++) {
         std::cout << "destino: " << i << " distância: ";
-        if (distance[i] == std::numeric_limits<int>::max()) {
+        if (distance[i] == std::numeric_limits<int32_t>::max()) {
             std::cout << "--" << " caminho: --" << std::endl;
         } else {
             std::cout << distance[i] << " caminho: ";
-            std::vector<int> path;
-            int j = i;
+            std::vector<int32_t> path;
+            int32_t j = i;
             while (j != -1) {
                 path.push_back(j);
                 j = previous[j];
             }
-            for (int k = path.size() - 1; k >= 0; k--) {
+            for (int32_t k = path.size() - 1; k >= 0; k--) {
                 std::cout << path[k];
                 if (k != 0) {
                     std::cout << " - ";
