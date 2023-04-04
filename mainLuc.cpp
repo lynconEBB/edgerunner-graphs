@@ -2,7 +2,7 @@
 #include <fstream>
 #include "graph/GraphGenerator.h"
 #include "graph/Graph.h"
-#include "executors/DijkstraExecutor.h"
+#include "solvers/DijkstraSolver.h"
 
 int main() {
     std::ifstream file("../tests/test3.txt");
@@ -15,8 +15,8 @@ int main() {
     Graph graph = graphGen.createGraph(file);
     graph.print();
 
-    DijkstraExecutor dj;
-    dj.execute(graph);
+    DijkstraSolver dj;
+    dj.solve(graph);
 
     return 0;
 }

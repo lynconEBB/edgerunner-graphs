@@ -1,13 +1,13 @@
-#ifndef GRAPHS_DIJKSTRAEXECUTOR_H
-#define GRAPHS_DIJKSTRAEXECUTOR_H
-#include "Executor.h"
+#ifndef GRAPHS_DIJKSTRASOLVER_H
+#define GRAPHS_DIJKSTRASOLVER_H
+#include "Solver.h"
 #include <queue>
 
-class DijkstraExecutor : public Executor{
+class DijkstraSolver : public Solver{
     using EdgePriorityQueue = std::priority_queue<Edge, std::vector<Edge>, std::greater<Edge>>;
 
 public:
-    void execute(Graph graph) override;
+    void solve(Graph graph) override;
     bool validate(Graph graph) override;
 
 private:

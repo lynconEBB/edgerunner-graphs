@@ -1,9 +1,9 @@
-#include "DijkstraExecutor.h"
+#include "DijkstraSolver.h"
 #include <iostream>
 #include <limits>
 
-void DijkstraExecutor::execute(Graph graph) {
-     int origin;
+void DijkstraSolver::solve(Graph graph) {
+    int origin;
     std::cin >> origin;
 
     std::vector<int> distance(graph.adjList.size(), std::numeric_limits<int>::max());
@@ -16,7 +16,7 @@ void DijkstraExecutor::execute(Graph graph) {
     print(graph, distance, previous);
 }
 
-bool DijkstraExecutor::validate(Graph graph){
+bool DijkstraSolver::validate(Graph graph){
     for (int i = 0; i < graph.adjList.size(); i++) {
         for (Edge edge : graph.adjList[i] ) {
             if(edge.weight < 0) return false;
@@ -25,8 +25,8 @@ bool DijkstraExecutor::validate(Graph graph){
     return true;
 }
 
-void DijkstraExecutor::minDistance(Graph graph, int32_t origin, std::vector<int32_t>& distance,
-                                   std::vector<int32_t>& previous, EdgePriorityQueue& priorityQueue){
+void DijkstraSolver::minDistance(Graph graph, int32_t origin, std::vector<int32_t>& distance,
+                                 std::vector<int32_t>& previous, EdgePriorityQueue& priorityQueue){
     distance[origin] = 0;
     priorityQueue.emplace(origin, 0);
 
@@ -45,7 +45,7 @@ void DijkstraExecutor::minDistance(Graph graph, int32_t origin, std::vector<int3
 
 }
 
-void DijkstraExecutor::print(Graph graph, std::vector<int32_t> distance, std::vector<int32_t> previous){
+void DijkstraSolver::print(Graph graph, std::vector<int32_t> distance, std::vector<int32_t> previous){
     for (int i = 0; i < graph.adjList.size(); i++) {
         std::cout << "destino: " << i << " distância: ";
         if (distance[i] == std::numeric_limits<int>::max()) {
