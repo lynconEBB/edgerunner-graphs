@@ -4,6 +4,7 @@
 #include "graph/Graph.h"
 #include "solvers/DijkstraSolver.h"
 #include "solvers/BellmanFordSolver.h"
+#include "solvers/FloydWarshallSolver.h"
 
 int main() {
     std::ifstream file("../tests/test1.txt");
@@ -19,8 +20,11 @@ int main() {
     //DijkstraSolver dj;
     //dj.solve(graph);
 
-    BellmanFordSolver bf;
-    bf.solve(graph);
+    //BellmanFordSolver bf;
+    //bf.solve(graph);
+
+    FloydWarshallSolver fw;
+    fw.solve(graph);
 
     return 0;
 }
