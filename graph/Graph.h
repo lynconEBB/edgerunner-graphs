@@ -25,12 +25,25 @@ public:
     bool isOriented;
 
 public:
-    explicit Graph(bool inIsOriented, int vertex): adjList(vertex), isOriented(inIsOriented) {}
+    Graph(): isOriented(false) {}
+
+    Graph(bool inIsOriented, int vertex): adjList(vertex), isOriented(inIsOriented) {}
 
     void addEdge(int32_t src, int32_t dest, int32_t weight);
 
     void print();
 
+    std::list<Edge>& operator[](uint32_t vertex) {
+        return adjList[vertex];
+    }
+
+     std::vector<std::list<Edge>>::iterator begin() {
+        return adjList.begin();
+    }
+
+    std::vector<std::list<Edge>>::iterator end() {
+        return adjList.end();
+    }
 };
 
 #endif
