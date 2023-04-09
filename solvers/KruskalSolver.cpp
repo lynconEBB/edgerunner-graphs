@@ -48,7 +48,7 @@ void KruskalSolver::outputResult() {
         char* nodeName2 = const_cast<char*>(std::to_string(edge.dst).c_str());
         Agnode_t* n2 = agnode(g, nodeName2, TRUE);
 
-        Agedge_t* e = agedge(g,n1,n2,"test", TRUE);
+        Agedge_t* e = agedge(g,n1,n2,"", TRUE);
         char* weightStr = const_cast<char*>(std::to_string(edge.weight).c_str());
         agsafeset(e, "label", weightStr,"");
         if (edge.inSpammingTree) {

@@ -4,7 +4,6 @@
 #include "Solver.h"
 #include <set>
 
-
 struct KruskalEdge {
 public:
     int32_t src;
