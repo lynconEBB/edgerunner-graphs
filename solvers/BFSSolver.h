@@ -4,6 +4,8 @@
 #include <vector>
 #include <queue>
 
+enum class Color;
+
 class BFSSolver: public Solver {
 
 public:
@@ -14,7 +16,7 @@ public:
 private:
     Graph currentGraph;
     std::queue<uint32_t> grayVertex;
-    std::vector<enum class Color> colors;
+    std::vector<Color> colors;
 
     void exploreVertice(uint32_t vertice);
 };

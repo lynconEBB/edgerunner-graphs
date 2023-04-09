@@ -3,6 +3,8 @@
 #include "Solver.h"
 #include <vector>
 
+enum class Color;
+
 class DFSSolver : public Solver
 {
 public:
@@ -14,7 +16,7 @@ private:
 
 private:
     std::list<uint32_t> visits;
-    std::vector<enum class Color> colors;
+    std::vector<Color> colors;
     Graph currentGraph;
 };
 

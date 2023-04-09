@@ -1,8 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include "graph/GraphGenerator.h"
-#include "solvers/DFSSolver.h"
-#include "solvers/BFSSolver.h"
+#include "solvers/KruskalSolver.h"
 
 int main() {
     std::ifstream file("../tests/test2.txt");
@@ -15,9 +14,10 @@ int main() {
     Graph graph = graphGen.createGraph(file);
 
     graph.print();
+    KruskalSolver solver;
 
-    BFSSolver solver;
-    solver.solve(graph);
+    if(solver.validate(graph))
+        solver.solve(graph);
 
     return 0;
 }
