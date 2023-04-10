@@ -6,6 +6,7 @@
 // Pré-condição: o grafo deve estar devidamente inicializado.
 // Pós-condição: a solução para o problema do caminho mais curto é impressa na tela.
 void BellmanFordSolver::solve(Graph graph) {
+    std::cout << "Insira a origem: ";
     int32_t origin;
     std::cin >> origin;
 
