@@ -10,7 +10,6 @@ class BFSSolver: public Solver {
 
 public:
     void solve(Graph graph) override;
-
     bool validate(Graph graph) override;
 
 private:

@@ -2,8 +2,6 @@
 #include <fstream>
 #include "graph/GraphGenerator.h"
 #include "graph/Graph.h"
-#include "solvers/DijkstraSolver.h"
-#include "solvers/BellmanFordSolver.h"
 #include "solvers/FloydWarshallSolver.h"
 
 int main() {
