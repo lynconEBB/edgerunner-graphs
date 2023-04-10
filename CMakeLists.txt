@@ -5,6 +5,6 @@ set(CMAKE_CXX_STANDARD 11)
 
 include(FindGraphviz.cmake)
 
-add_executable(edgerunner main.cpp graph/GraphGenerator.cpp graph/GraphGenerator.h App.cpp App.h solvers/Solver.cpp solvers/Solver.h graph/Graph.cpp graph/Graph.h solvers/DFSSolver.cpp solvers/DFSSolver.h solvers/BFSSolver.cpp solvers/BFSSolver.h solvers/KruskalSolver.cpp solvers/KruskalSolver.h solvers/PrimSolver.cpp solvers/PrimSolver.h solvers/FloydWarshallSolver.cpp solvers/FloydWarshallSolver.h solvers/DijkstraSolver.cpp solvers/DijkstraSolver.h solvers/BellmanFordSolver.cpp solvers/BellmanFordSolver.h)
-target_include_directories(edgerunner PUBLIC ${GRAPHVIZ_INCLUDE_DIRS})
+add_executable(edgerunner src/main.cpp src/graph/GraphGenerator.cpp src/graph/GraphGenerator.h src/App.cpp src/App.h src/solvers/Solver.cpp src/solvers/Solver.h src/graph/Graph.cpp src/graph/Graph.h src/solvers/DFSSolver.cpp src/solvers/DFSSolver.h src/solvers/BFSSolver.cpp src/solvers/BFSSolver.h src/solvers/KruskalSolver.cpp src/solvers/KruskalSolver.h src/solvers/PrimSolver.cpp src/solvers/PrimSolver.h src/solvers/FloydWarshallSolver.cpp src/solvers/FloydWarshallSolver.h src/solvers/DijkstraSolver.cpp src/solvers/DijkstraSolver.h src/solvers/BellmanFordSolver.cpp src/solvers/BellmanFordSolver.h)
+target_include_directories(edgerunner PUBLIC ${GRAPHVIZ_INCLUDE_DIRS} src)
 target_link_libraries(edgerunner  PUBLIC ${GRAPHVIZ_GVC_LIBRARY} ${GRAPHVIZ_CGRAPH_LIBRARY})

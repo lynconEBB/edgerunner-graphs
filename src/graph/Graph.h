@@ -52,6 +52,11 @@ public:
     // Pós-condição: os dados do grafo são impressos na tela.
     void print();
 
+    // Verifica se o grafo é conectado
+    // Pré-condição: nenhuma.
+    // Pós-condição: retorna false se não for conectado e true se for conectado
+    bool isConnected();
+
     // Acessa o índice da lista adjacente do grafo.
     // Pré-condição: índice da lista.
     // Pós-condição: retorna a aresta armazenada naquela posição.

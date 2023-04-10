@@ -3,10 +3,24 @@
 #include <gvc.h>
 #include <cgraph.h>
 
+// Valida se o grafo passado como parâmetro é não orientado e conexo.
+// Pré-condição: o grafo passado como parâmetro deve ser válido.
+// Pós-condição: retorna verdadeiro se o grafo é não orientado e conexo, falso caso contrário.
 bool PrimSolver::validate(Graph graph) {
+    if (graph.isOriented) {
+        std::cout << "Nao e possivel aplicar o algoritmo de Prim - grafo e orientado!!\n";
+        return false;
+    }
+    if (!graph.isConnected()) {
+        std::cout << "Nao e possivel aplicar o algoritmo de Prim - grafo nao e conectado!!\n";
+        return false;
+    }
     return true;
 }
 
+// Executa o algoritmo de Prim no grafo passado como parâmetro e armazena a árvore geradora mínima encontrada internamente na classe
+// Pré-condição: o grafo passado como parâmetro deve ser válido.
+// Pós-condição: a solução do problema é armazenada na classe e apresentada, podendo ser acessada pelos métodos públicos.
 void PrimSolver::solve(Graph graph) {
     int32_t origin;
     std::cout << "Vertice inicial: ";
@@ -43,6 +57,9 @@ void PrimSolver::solve(Graph graph) {
     outputResult();
 }
 
+// Calcula o peso total da árvore geradora mínima armazenada internamente na classe.
+// Pré-condição: a solução do problema deve ter sido armazenada na classe PrimSolver.
+// Pós-condição: Retorna o peso total baseado no resultado calculado
 int32_t PrimSolver::getTotalWeight() {
     int32_t sum = 0;
 
@@ -56,6 +73,9 @@ int32_t PrimSolver::getTotalWeight() {
 
 const std::string PrimSolver::DEFAULT_OUT_FILE = "primResult.png";
 
+// Escreve a árvore geradora mínima armazenada internamente na classe em um arquivo de saída com nome definido pela constante
+// Pré-condição: a solução do problema deve ter sido armazenada na classe PrimSolver.
+// Pós-condição: o resultado da solução é impresso na saída padrão e um arquivo de imagem é gerado.
 void PrimSolver::outputResult() {
     std::cout << "peso total: " << getTotalWeight() << '\n';
 
@@ -102,6 +122,9 @@ void PrimSolver::outputResult() {
     std::cout << "Desenho da arvore produzido no arquivo: " << DEFAULT_OUT_FILE;
 }
 
+// Operador de inserção em stream para um objeto PrimVertice
+// Pré-condição: Nenhuma
+// Pós-condição: a representação em string do objeto PrimVertice é inserida na stream de saída.
 std::ostream& operator<<(std::ostream& os, const PrimVertice& vertice) {
     os << "(" << vertice.prev << ", " << vertice.num << ")";
     return os;

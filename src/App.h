@@ -51,6 +51,13 @@ private:
     // Pós-condição: O menu é exibido na tela.
     void printMenu();
 
+    // Desenha o grafo carregado atualmente para o arquivo padrão
+    // Pré-condição: Grafo carregado previamente
+    // Pós-condição: Arquivo contendo a imagem do grafo criado
+    void drawGraphToDefaultFile();
+
+private:
+    static const std::string DEFAULT_OUT_FILE;
     // A variável indica se um grafo foi carregado na memória.
     bool hasGraphLoaded = false;
     // A variável armazena a opção escolhida pelo usuário.

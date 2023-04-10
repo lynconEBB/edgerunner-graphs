@@ -6,11 +6,17 @@
 #include <cgraph.h>
 #include <string>
 
+// Sobrecarga do operador de inserção em stream para a classe KruskalEdge
+// Pré-condição: a instância da KruskalEdge deve ser válida e conter os valores dos vértices de origem e destino.
+// Pós-condição: a aresta KruskalEdge é inserida na saída de fluxo de forma formatada.
 std::ostream& operator<<(std::ostream& os, const KruskalEdge& edge) {
     os << "(" << edge.src << ", " << edge.dst << ")";
     return os;
 }
 
+// Resolve o problema de árvore geradora mínima utilizando o algoritmo de Kruskal.
+// Pré-condição: o grafo passado como parâmetro deve ser válido.
+// Pós-condição: a solução do problema é armazenada na classe e apresentada, podendo ser acessada pelos métodos públicos.
 void KruskalSolver::solve(Graph graph) {
     for (int i = 0; i < graph.adjList.size(); i++){
         sets.push_back(i);
@@ -31,6 +37,9 @@ void KruskalSolver::solve(Graph graph) {
     outputResult();
 }
 
+// Imprime o resultado da solução do problema de árvore geradora mínima utilizando o algoritmo de Kruskal.
+// Pré-condição: a solução do problema deve ter sido armazenada na classe KruskalSolver.
+// Pós-condição: o resultado da solução é impresso na saída padrão e um arquivo de imagem é gerado.
 void KruskalSolver::outputResult() {
 
     std::cout << "peso total: " << finalWeight << '\n';
@@ -66,6 +75,9 @@ void KruskalSolver::outputResult() {
     gvFreeContext(gvc);
 }
 
+// Une dois conjuntos de vértices em um único conjunto.
+// Pré-condição: os dois conjuntos devem ser válidos e diferentes.
+// Pós-condição: os dois conjuntos são unidos em um único conjunto.
 void KruskalSolver::joinSets(uint32_t set1, uint32_t set2) {
     for (uint32_t& set : sets) {
         if (set == set1)
@@ -73,32 +85,17 @@ void KruskalSolver::joinSets(uint32_t set1, uint32_t set2) {
     }
 }
 
+// Valida se o grafo passado como parâmetro é não orientado e conexo.
+// Pré-condição: o grafo passado como parâmetro deve ser válido.
+// Pós-condição: retorna verdadeiro se o grafo é não orientado e conexo, falso caso contrário.
 bool KruskalSolver::validate(Graph graph) {
-    if (graph.isOriented)
+    if (graph.isOriented) {
+        std::cout << "Nao e possivel aplicar o algoritmo de Kruskal - grafo e orientado!!\n";
         return false;
-
-    std::vector<bool> visited;
-    std::queue<int32_t> nextVertex;
-
-    visited.reserve(graph.adjList.size());
-    for (int i = 0; i < graph.adjList.size(); i++) {
-        visited.push_back(false);
     }
-    nextVertex.push(0);
-
-    while (!nextVertex.empty()) {
-        visited[nextVertex.front()] = true;
-        for (Edge edge : graph[nextVertex.front()]) {
-            if (!visited[edge.dest])
-                nextVertex.push(edge.dest);
-        }
-        nextVertex.pop();
+    if (!graph.isConnected()) {
+        std::cout << "Nao e possivel aplicar o algoritmo de Kruskal - grafo nao e conectado!!\n";
+        return false;
     }
-
-    for (bool wasVisited : visited) {
-        if (!wasVisited)
-            return false;
-    }
-
     return true;
 }

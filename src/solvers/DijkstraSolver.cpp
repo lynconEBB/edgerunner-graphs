@@ -26,7 +26,10 @@ void DijkstraSolver::solve(Graph graph) {
 bool DijkstraSolver::validate(Graph graph){
     for (int32_t i = 0; i < graph.adjList.size(); i++) {
         for (Edge edge : graph.adjList[i] ) {
-            if(edge.weight < 0) return false;
+            if(edge.weight < 0) {
+                std::cout << "Nao e possivel aplicar o algoritmo de Dijkstra - grafo possui arestas com peso negativo!!\n";
+                return false;
+            }
         }
     }
     return true;

@@ -1,5 +1,7 @@
 #include "Graph.h"
 #include <iostream>
+#include <queue>
+
 
 // Adiciona uma aresta ao grafo.
 // Pré-condição: Vertices de origem e destino, e o peso que da aresta.
@@ -31,6 +33,37 @@ void Graph::print() {
        }
        std::cout << '\n';
     }
+}
+
+// Verifica se o grafo é conectado
+// Pré-condição: nenhuma.
+// Pós-condição: retorna false se não for conectado e true se for conectado
+bool Graph::isConnected() {
+
+    std::vector<bool> visited;
+    std::queue<int32_t> nextVertex;
+
+    visited.reserve(adjList.size());
+    for (int i = 0; i < adjList.size(); i++) {
+        visited.push_back(false);
+    }
+    nextVertex.push(0);
+
+    while (!nextVertex.empty()) {
+        visited[nextVertex.front()] = true;
+        for (Edge edge : adjList[nextVertex.front()]) {
+            if (!visited[edge.dest])
+                nextVertex.push(edge.dest);
+        }
+        nextVertex.pop();
+    }
+
+    for (bool wasVisited : visited) {
+        if (!wasVisited)
+            return false;
+    }
+
+    return true;
 }
 
 

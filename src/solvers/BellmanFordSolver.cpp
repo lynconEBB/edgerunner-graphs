@@ -24,7 +24,10 @@ void BellmanFordSolver::solve(Graph graph) {
 // Pré-condição: o grafo deve estar devidamente inicializado.
 // Pós-condição: retorna true se o grafo atende às condições e false caso contrário.
 bool BellmanFordSolver::validate(Graph graph){
-    if(!graph.isOriented) return false;
+    if(!graph.isOriented)  {
+        std::cout << "Nao e possivel aplicar o algoritmo de Bellman-Ford - grafo nao e orientado!!\n";
+        return false;
+    }
     return true;
 }
 

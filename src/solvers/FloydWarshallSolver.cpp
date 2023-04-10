@@ -24,7 +24,6 @@ void FloydWarshallSolver::solve(Graph graph) {
 // Pré-condição: o grafo deve estar devidamente inicializado.
 // Pós-condição: retorna true se o grafo atende às condições e false caso contrário.
 bool FloydWarshallSolver::validate(Graph graph){
-
     return true;
 }
 

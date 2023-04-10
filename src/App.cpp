@@ -8,6 +8,8 @@
 #include "solvers/BellmanFordSolver.h"
 #include "solvers/BFSSolver.h"
 #include "solvers/DFSSolver.h"
+#include <gvc.h>
+#include <cgraph.h>
 
 // Essa função é responsável por iniciar a execução da aplicação e gerenciar todas as interações com o usuário
 // Pré-condição: Nenhuma informação adicional é necessária.
@@ -27,7 +29,7 @@ void App::run() {
 void App::requestFile(std::ifstream &configFile) {
     std::string fileName;
     while (!configFile.is_open()) {
-        std::cout << "Entre com o arquivo de definicao do automato:";
+        std::cout << "Entre com o arquivo de definicao do grafo:";
         std::cin >> fileName;
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
@@ -62,6 +64,8 @@ void App::executeOption() {
         requestFile(file);
         try {
             currentGraph = graphGenerator.createGraph(file);
+            std::cout << "Grafo carregado com sucesso!!\n";
+            currentGraph.print();
             hasGraphLoaded = true;
         } catch (const char* error) {
             std::cout << "[Erro]>" << error << '\n';
@@ -76,7 +80,7 @@ void App::executeOption() {
     }
 
     if (option == Option::DRAW) {
-        std::cout << "Grafo desenhado no arquivo: !\n";
+        drawGraphToDefaultFile();
         return;
     }
     switch (option) {
@@ -126,4 +130,43 @@ void App::printMenu() {
     std::cout << "8-Executar Kruskal\n";
     std::cout << "9-Executar Prim\n";
     std::cout << "10-Sair\n";
+}
+const std::string App::DEFAULT_OUT_FILE = "graph.png";
+
+// Desenha o grafo carregado atualmente para o arquivo padrão
+// Pré-condição: Grafo carregado previamente
+// Pós-condição: Arquivo contendo a imagem do grafo criado
+void App::drawGraphToDefaultFile() {
+    Agraph_t* g = agopen("G", currentGraph.isOriented ? Agdirected : Agundirected, nullptr);
+    agsafeset(g, "label", "Graph", "");
+    agsafeset(g, "fontname", "Arial", "");
+    agsafeset(g, "rankdir", "LR", "");
+    agsafeset(g, "nodesep", "0.5", "");
+
+    for (int i = 0; i < currentGraph.adjList.size(); i++) {
+        char* verticeName1 = const_cast<char*>(std::to_string(i).c_str());
+        Agnode_t* v1 =  agnode(g, verticeName1, TRUE);
+        agsafeset(v1, "shape", "circle", "");
+
+        for (Edge edge : currentGraph[i]) {
+            if (!currentGraph.isOriented && edge.dest < i)
+                continue;
+
+            char* verticeName2 = const_cast<char*>(std::to_string(edge.dest).c_str());
+            Agnode_t* v2 =  agnode(g, verticeName2, TRUE);
+            agsafeset(v2, "shape", "circle", "");
+
+            Agedge_t* e = agedge(g,v1,v2,"", TRUE);
+            char* weight = const_cast<char*>(std::to_string(edge.weight).c_str());
+            agsafeset(e, "label", weight,"");
+        }
+    }
+
+    GVC_t* gvc = gvContext();
+    gvLayout(gvc, g, "dot");
+    gvRenderFilename(gvc, g, "png", DEFAULT_OUT_FILE.c_str());
+    agclose(g);
+    gvFreeContext(gvc);
+
+    std::cout << "Desenho da arvore produzido no arquivo: " << DEFAULT_OUT_FILE << '\n';
 }
