@@ -3,6 +3,9 @@
 #include <regex>
 #include <algorithm>
 
+// Criar um grafo com base nas informações presentes no arquivo de entrada.
+// Pré-condição: um arquivo de entrada aberto e no formato correto para leitura.
+// Pós-condição: retorna um grafo contendo as informações do arquivo.
 Graph GraphGenerator::createGraph(std::ifstream &input) {
     bool isOriented = getIsOriented(input);
     int32_t numVertex = getNumVertex(input);
@@ -11,6 +14,9 @@ Graph GraphGenerator::createGraph(std::ifstream &input) {
     return graph;
 }
 
+// Lê do arquivo se o grafo deve ser orientado ou não.
+// Pré-condição: um arquivo de entrada aberto.
+// Pós-condição: retorna um booleano referente se é ou não orientado.
 bool GraphGenerator::getIsOriented(std::ifstream &input) {
     std::string line;
     std::getline(input, line);
@@ -29,6 +35,9 @@ bool GraphGenerator::getIsOriented(std::ifstream &input) {
     return "sim" == matches.str(1);
 }
 
+// Lê do arquivo a quantidade de vértices que o grafo deve ter.
+// Pré-condição: um arquivo de entrada aberto.
+// Pós-condição: retorna o número de vértices.
 int32_t GraphGenerator::getNumVertex(std::ifstream &input) {
     std::string line;
     std::getline(input, line);
@@ -44,6 +53,9 @@ int32_t GraphGenerator::getNumVertex(std::ifstream &input) {
     return stoi(matches.str(1));
 }
 
+// Lê do arquivo as arestas e adiciona ao grafo.
+// Pré-condição: um arquivo de entrada aberto.
+// Pós-condição: adiciona as arestadas definidas no arquivo ao grafo.
 void GraphGenerator::setEdges(std::ifstream& input, Graph& graph){
     std::string line;
     while(std::getline(input, line)){

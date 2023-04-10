@@ -1,6 +1,9 @@
 #include "Graph.h"
 #include <iostream>
 
+// Adiciona uma aresta ao grafo.
+// Pré-condição: Vertices de origem e destino, e o peso que da aresta.
+// Pós-condição: A aresta é adicionada ao grafo.
 void Graph::addEdge(int32_t src, int32_t dest, int32_t weight) {
     // Adiciona aresta src -> dest e ordena a lista
     adjList[src].emplace_back(dest, weight);
@@ -17,6 +20,9 @@ void Graph::addEdge(int32_t src, int32_t dest, int32_t weight) {
     }
 }
 
+// Imprime na tela os dados referentes ao grafo.
+// Pré-condição: nenhuma.
+// Pós-condição: os dados do grafo são impressos na tela.
 void Graph::print() {
     for (int i = 0; i < adjList.size(); i++) {
        std::cout << "Vertice " << i << ":";

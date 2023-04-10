@@ -2,6 +2,9 @@
 #include <iostream>
 #include <limits>
 
+// Resolve o problema do caminho mínimo utilizando o algoritmo de Dijkstra
+// Pré-condição: o grafo deve estar devidamente inicializado.
+// Pós-condição: a solução para o problema do caminho mais curto é impressa na tela.
 void DijkstraSolver::solve(Graph graph) {
     int32_t origin;
     std::cin >> origin;
@@ -16,6 +19,9 @@ void DijkstraSolver::solve(Graph graph) {
     print(graph, distance, previous, origin);
 }
 
+// Verifica se o grafo de entrada é válido para o algoritmo de Dijkstra.
+// Pré-condição: o grafo deve estar devidamente inicializado.
+// Pós-condição: retorna true se o grafo atende às condições e false caso contrário.
 bool DijkstraSolver::validate(Graph graph){
     for (int32_t i = 0; i < graph.adjList.size(); i++) {
         for (Edge edge : graph.adjList[i] ) {
@@ -25,6 +31,11 @@ bool DijkstraSolver::validate(Graph graph){
     return true;
 }
 
+// Calcula a distância mínima e o caminho até cada vértice do grafo a partir de um vértice de origem usando o algoritmo de Dijkstra.
+// Pré-condição: o grafo deve estar devidamente inicializado. A fila de prioridade priorityQueue deve estar vazia,
+//               enquanto os vetores distance e previous devem estar inicializados corretamente.
+// Pós-condição: os vetores distance e previous contêm as informações do caminho mais curto a partir do vértice de origem,
+//               enquanto a fila de prioridade priorityQueue está vazia.
 void DijkstraSolver::minDistance(Graph graph, int32_t origin, std::vector<int32_t>& distance,
                                  std::vector<int32_t>& previous, EdgePriorityQueue& priorityQueue){
     distance[origin] = 0;
@@ -45,6 +56,10 @@ void DijkstraSolver::minDistance(Graph graph, int32_t origin, std::vector<int32_
 
 }
 
+// Imprime o resultado da solução do algoritmo de Dijkstra para o grafo de entrada.
+// Pré-condição: o grafo deve estar devidamente inicializado. Os vetores distance e previous devem conter as informações
+//               do caminho mais curto a partir do vértice de origem.
+// Pós-condição: a solução para o problema do caminho mais curto é impressa na tela.
 void DijkstraSolver::print(Graph graph, std::vector<int32_t> distance, std::vector<int32_t> previous, int32_t origin){
     std::cout << "origem: " << origin << std::endl;
     for (int32_t i = 0; i < graph.adjList.size(); i++) {
